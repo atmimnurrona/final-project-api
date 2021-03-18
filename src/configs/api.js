@@ -1,0 +1,20 @@
+import axios from "axios"
+
+// axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
+// axios.defaults.baseURL = "http://localhost:8080"
+// axios.defaults.timeout = 10000;
+
+axios.interceptors.response.use(function (response) {
+  if (response.status !== 200) {
+    throw new Error();
+  }
+  let data = response.data
+  if (response.data.code !== 200) {
+    throw new Error(data.message)
+  }
+  return data.data;
+}, function (error) {
+  return Promise.reject(error);
+})
+
+export default axios;
