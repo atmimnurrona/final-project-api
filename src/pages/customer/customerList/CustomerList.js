@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import {Link} from "react-router-dom"
 import CustomerRow from "./CustomerRow"
 import {findAllCustomerAction} from '../../../actions/customerAction'
 import {connect} from "react-redux"
@@ -43,7 +42,6 @@ function CustomerList({
                             <th>Email</th>
                             {/*<th>Address</th>*/}
                             <th>Employee Type</th>
-                            {/*<th>Need Type</th>*/}
                             <th>Action</th>
                         </tr>
                         </thead>
@@ -65,7 +63,6 @@ function CustomerList({
                         }
                         </tbody>
                     </Table>
-
                 </div>
             </Container>
         </Containers>

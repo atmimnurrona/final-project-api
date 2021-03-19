@@ -20,18 +20,16 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         idNumber: 0,
         address: "",
         employeeType: "",
-        // needType: "",
         contractLength: 0,
         contractStart: ""
     })
     const history = useHistory()
-    const [employeeType, setEmployeeType] = useState("")
-    // const [needType, setNeedType] = useState("")
 
     useEffect(() => {
-        if (id && parseInt(id) !== data.id) {
+        if (id !== data.id) {
             findCustomerByIdAction(id);
             setData(customer)
+            console.log("ini useeffect", customer)
         }
     }, [customer])
 
@@ -46,22 +44,18 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         let value = e.target.value
         setData({...data, [name]: value})
 
-        console.log(data)
-        // console.log("DATA HANDLECHANGE",data)
+        console.log("ini handle change", data)
     }
 
     const handleEmployee = (e) => {
         setData({...data, employeeType: e})
     }
 
-    const handleNeed = (e) => {
-        setData({...data, needType: e})
-    }
-
     const handleSubmit = (e) => {
         e.preventDefault()
         saveCustomerAction(data)
-        console.log("handleSubmit", data)
+
+        console.log("ini handle submit",data)
     }
 
     if (redirect === true) {
@@ -79,7 +73,7 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                         {!isLoading ?
                             <Form onSubmit={handleSubmit}>
                                 <FormGroup row>
-                                    <Label for="name" sm={2}>Customer's Name</Label>
+                                    <Label htmlFor="name" sm={2}>Customer's Name</Label>
                                     <Col sm={10}>
                                         <Input
                                             required
@@ -87,12 +81,12 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                             value={data?.name || ''}
                                             type="text"
                                             name="name"
-                                            id="email"
+                                            // id="email"
                                             placeholder="input name"/>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="email" sm={2}>Email</Label>
+                                    <Label htmlFor="email" sm={2}>Email</Label>
                                     <Col sm={10}>
                                         <Input
                                             required
@@ -100,12 +94,12 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                             value={data?.email || ''}
                                             type="email"
                                             name="email"
-                                            id="email"
+                                            // id="email"
                                             placeholder="input email"/>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="idNumber" sm={2}>ID Number</Label>
+                                    <Label htmlFor="idNumber" sm={2}>ID Number</Label>
                                     <Col sm={10}>
                                         <Input
                                             required
@@ -113,12 +107,12 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                             value={data?.idNumber || ''}
                                             type="number"
                                             name="idNumber"
-                                            id="idNumber"
+                                            // id="idNumber"
                                             placeholder="input ID number"/>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="exampleText" sm={2}>Address</Label>
+                                    <Label htmlFor="exampleText" sm={2}>Address</Label>
                                     <Col sm={10}>
                                         <Input
                                             required
@@ -130,7 +124,7 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
-                                    <Label for="select" sm={2}>Type of customer</Label>
+                                    <Label htmlFor="select" sm={2}>Type of customer</Label>
                                     <Col sm={10}>
                                         <DropdownList
                                             data={[
@@ -179,7 +173,7 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                     <Col sm={{size: 10, offset: 2}}>
                                         <Button style={{background:"#e42256"}}>
                                             <FontAwesomeIcon icon={faSave}/>
-                                            {id > 0 ? "  Update" : "  Submit"}
+                                            {id !== null ? "  Update" : "  Submit"}
                                         </Button> {' '}
                                         <Button href="/customer" style={{background:"#e42256"}}>
                                             <FontAwesomeIcon icon={faArrowLeft}/>

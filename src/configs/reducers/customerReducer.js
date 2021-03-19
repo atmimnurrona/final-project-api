@@ -2,11 +2,17 @@ import {
     FIND_ALL_CUSTOMER,
     FIND_ALL_CUSTOMER_FAILURE,
     FIND_ALL_CUSTOMER_SUCCESS,
-    FIND_CUSTOMER_BY_ID, FIND_CUSTOMER_BY_ID_FAILURE,
+
+    FIND_CUSTOMER_BY_ID,
+    FIND_CUSTOMER_BY_ID_FAILURE,
     FIND_CUSTOMER_BY_ID_SUCCESS,
+
     SAVE_CUSTOMER,
     SAVE_CUSTOMER_FAILURE,
-    SAVE_CUSTOMER_SUCCESS, UPDATE_CUSTOMER, UPDATE_CUSTOMER_SUCCESS
+    SAVE_CUSTOMER_SUCCESS,
+
+    UPDATE_CUSTOMER,
+    UPDATE_CUSTOMER_SUCCESS
 } from "../constants/actions"
 
 
@@ -45,17 +51,14 @@ export const findAllCustomerReducer = (state = initialState, action) => {
 }
 
 export const saveCustomerReducer = (state = {...initialState}, action) => {
-    console.log("savecustomer reducer")
     switch (action.type) {
         case SAVE_CUSTOMER:
-            console.log("save customer reducer in case")
             return {
                 ...state,
                 data: null,
                 isLoading: true
             }
         case SAVE_CUSTOMER_SUCCESS:
-            console.log("save customer reducer success")
             return {
                 data: action.data,
                 isLoading: false,
@@ -109,11 +112,8 @@ export const updateCustomerReducer = (state = {}, action) => {
 
     switch (action.type) {
         case UPDATE_CUSTOMER:
-            console.log("updating unit in reducers")
             return true
         case UPDATE_CUSTOMER_SUCCESS:
-
-            console.log("updating success unit in reducers")
             return true
         default:
             return false;

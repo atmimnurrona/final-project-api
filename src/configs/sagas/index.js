@@ -21,7 +21,6 @@ export default function* rootSaga() {
 
     watchFindAllTransaction(),
     watchSaveTransaction(),
-
     watchFindTransactionById(),
     watchUpdateTransactionById
   ])

@@ -8,7 +8,6 @@ import SignIn from "../pages/login/SignIn";
 import HomeMaster from "../pages/home/HomeMaster";
 import SignUp from "../pages/login/SignUp";
 import TransactionForm from "../pages/transaction/transactionForm";
-import CobainForm from "../pages/customer/customerForm/Coba/CobainForm";
 
 const routes = [
     // {
@@ -53,6 +52,11 @@ const routes = [
     },
     {
         path: '/customer/form',
+        component: <CustomerForm />,
+        exact: true
+    },
+    {
+        path: '/customer/:id/edit',
         component: <CustomerForm />,
         exact: true
     },

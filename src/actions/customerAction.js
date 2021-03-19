@@ -20,7 +20,7 @@ export function findCustomerByIdAction(id) {
     }
 }
 
-export function updateCustomer(payload) {
+export function updateCustomerAction(payload) {
     return {
         type: UPDATE_CUSTOMER,
         payload

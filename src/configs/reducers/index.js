@@ -1,5 +1,11 @@
 import { combineReducers } from "redux"
-import { findAllCustomerReducer, saveCustomerReducer, findCustomerByIdReducer, updateCustomerReducer } from "./customerReducer"
+import {
+  findAllCustomerReducer,
+  saveCustomerReducer,
+  findCustomerByIdReducer,
+  updateCustomerReducer
+} from "./customerReducer"
+
 import {
   finAllTransactionReducer,
   findTransactionByIdReducer,

@@ -10,17 +10,16 @@ import {
 
   FIND_CUSTOMER_BY_ID,
   FIND_CUSTOMER_BY_ID_FAILURE,
-  FIND_CUSTOMER_BY_ID_SUCCESS, UPDATE_CUSTOMER
+  FIND_CUSTOMER_BY_ID_SUCCESS,
+
+  UPDATE_CUSTOMER
 
 } from "../constants/actions"
 import axios from "../api"
-import {updateCustomer} from "../../actions/customerAction";
 
 function* findAllCustomerSaga() {
-
   let result = yield axios.get("/customer")
     .then(data => {
-      // console.log("SAGAAAA",data)
       return ({
         type: FIND_ALL_CUSTOMER_SUCCESS,
         data: data
@@ -39,7 +38,7 @@ function* saveCustomerSaga(action) {
   let model = action.model;
   let method = 'POST', url = '/customer';
   if (model.id) {
-    method = "PUT";
+    method = "PATCH";
     url += `/${model.id}`
   }
 
