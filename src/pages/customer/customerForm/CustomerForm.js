@@ -20,11 +20,13 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         idNumber: 0,
         address: "",
         employeeType: "",
-        needType: ""
+        // needType: "",
+        contractLength: 0,
+        contractStart: ""
     })
     const history = useHistory()
     const [employeeType, setEmployeeType] = useState("")
-    const [needType, setNeedType] = useState("")
+    // const [needType, setNeedType] = useState("")
 
     useEffect(() => {
         if (id && parseInt(id) !== data.id) {
@@ -34,7 +36,6 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
     }, [customer])
 
     useEffect(() => {
-
         if (saveCustomer) {
             history.push('/customer')
         }
@@ -45,7 +46,8 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         let value = e.target.value
         setData({...data, [name]: value})
 
-        console.log("DATA HANDLECHANGE",data)
+        console.log(data)
+        // console.log("DATA HANDLECHANGE",data)
     }
 
     const handleEmployee = (e) => {
@@ -70,7 +72,7 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         <div>
             <Container error={error} />
             <HeaderMaster/>
-            <div className="container" style={{marginTop:"10px"}}>
+            <div className="container-fluid" style={{marginTop:"10px"}}>
                 <h1 style={{fontSize:"3vw", color:"#e42556", margin:"3%", textAlign:"center"}}>Form Customer</h1>
                 <div className="col-md-13">
                     <div className="form form-container">
@@ -142,21 +144,37 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                         />
                                     </Col>
                                 </FormGroup>
+
+                                {data.employeeType == "CONTRACT"
+                                &&
+
+                                    <div>
                                 <FormGroup row>
-                                    <Label for="select" sm={2}>Need Type</Label>
+                                    <Label for="contractStart" sm={2}>Contract Start</Label>
                                     <Col sm={10}>
-                                        <DropdownList
-                                            data={[
-                                                {value: "CAPITAL", label: "CAPITAL"},
-                                                {value: "CONSUMPTIVE", label: "CONSUMPTIVE"},
-                                                {value: "INVESTMENT", label: "INVESTMENT"}
-                                            ]}
-                                            value={data?.needType}
-                                            placeholder="Select Need Type"
-                                            handleDropdown={handleNeed}
-                                        />
+                                        <Input
+                                            onChange={handleChange}
+                                            value={data?.contractStart || ''}
+                                            type="date"
+                                            name="contractStart"
+                                            id="contractStart"
+                                            placeholder="contract start"/>
                                     </Col>
                                 </FormGroup>
+                                <FormGroup row>
+                                    <Label for="contractLength" sm={2}>Contract Length</Label>
+                                    <Col sm={10}>
+                                        <Input
+                                            onChange={handleChange}
+                                            value={data?.contractLength || ''}
+                                            type="number"
+                                            name="contractLength"
+                                            id="contractLength"
+                                            placeholder="contract length"/>
+                                    </Col>
+                                </FormGroup>
+                                    </div>
+                                }
                                 <FormGroup check row>
                                     <Col sm={{size: 10, offset: 2}}>
                                         <Button style={{background:"#e42256"}}>

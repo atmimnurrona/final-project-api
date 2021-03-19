@@ -10,7 +10,7 @@ const TransactionRow = ({data, onUpdate, number}) => {
             <td>{number}</td>
             <td>{data.customer.name}</td>
             <td>{data.customer.employeeType} </td>
-            <td>{data.customer.needType}</td>
+            <td>{data.needType}</td>
             <td>{data.loan}</td>
             <td>{data.tenor}</td>
             <td>{data.interestRate}</td>
