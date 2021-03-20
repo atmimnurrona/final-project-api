@@ -3,8 +3,10 @@ import {Link} from 'react-router-dom'
 import {Button} from "reactstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faHandshake, faInfoCircle, faPencilAlt, faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
+import CustomerDetail from "../CustomerDetail";
 
 const CustomerRow = ({data, onUpdate, number}) => {
+
     return (
         <tr>
             <td>{number}</td>
@@ -14,7 +16,8 @@ const CustomerRow = ({data, onUpdate, number}) => {
             {/*<td>{data.address}</td>*/}
             <td>{data.employeeType}</td>
             <td>
-                <Button href={`/customer/detail/${data.id}`} style={{background:"#e42256"}}>
+                {/*<CustomerDetail/>{' '}*/}
+                <Button onClick={data} href={`/customer/${data.id}/detail`} style={{background:"#e42256"}}>
                     <FontAwesomeIcon icon={faInfoCircle}/>
                 </Button>{' '}
                 <Button onClick={onUpdate} href={`/customer/${data.id}/edit`} style={{background:"#e42256"}}>

@@ -49,9 +49,7 @@ function CustomerList({
 
                         {
                             !isLoading ?
-
                                 customers?.list?.map((e, i) => {
-
                                     return (
                                         <CustomerRow key={i} data={e} number={(customers.page * customers.size) + 1 + i} />
                                     )

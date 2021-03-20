@@ -23,7 +23,6 @@ import Container from "../../../components/Containers/Container";
 import DropdownList from "../../../components/DropdownList/DropdownList";
 import HeaderMaster from "../../../components/navbar/NavbarMaster";
 
-
 const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, customer, findCustomerByIdAction}) => {
     const {id} = useParams()
     const [redirect] = useState(false)
@@ -37,8 +36,6 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         idNumber: 0,
         address: "",
         employeeType: "",
-        contractLength: 0,
-        contractStart: "",
         idPhoto: "",
         profilePhoto: ""
     })
@@ -49,7 +46,6 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         if (id !== data.id) {
             findCustomerByIdAction(id);
             setData(customer)
-            console.log("ini useeffect", customer)
         }
     }, [customer])
 
@@ -59,12 +55,26 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
         }
     }, [saveCustomer, history])
 
-    const handlePhoto = (e) => {
+    const handlePhoto = async (e) => {
         let name = e.target.name
         let value = e.target.files[0]
         setPhoto( {...photo, [name]: value})
 
-        console.log("handle photo",photo)
+        const formData = new FormData()
+        formData.append("file", value)
+        formData.append("upload_preset", "ve2u0qv8")
+
+        const response = await fetch("https://api.cloudinary.com/v1_1/nielnaga/image/upload", {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            body: formData // body data type must match "Content-Type" header
+        }).then(res => res.json())
+            .then(res => {
+                console.log(res.url)
+                setData({
+                    ...data,
+                    [name] : res.url
+                })
+            })
     }
 
     const uploadIdPhoto = async () => {
@@ -77,7 +87,6 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
             body: formData // body data type must match "Content-Type" header
         }).then(res => res.json())
             .then(res => {
-                console.log(res)
                 console.log(res.url)
                 setData({
                     ...data,
@@ -97,7 +106,6 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
             body: formData // body data type must match "Content-Type" header
         }).then(res => res.json())
             .then(res => {
-                console.log(res)
                 console.log(res.url)
                 setData({
                     ...data,
@@ -121,8 +129,8 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        uploadIdPhoto()
-        uploadProfilePhoto()
+        // uploadIdPhoto()
+        // uploadProfilePhoto()
 
         saveCustomerAction(data)
 
@@ -252,7 +260,6 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                                 name="idPhoto"
                                                 onChange={handlePhoto}
                                                 accept="image/jpeg, image/png" />
-                                        <button onClick={uploadIdPhoto}>test</button>
                                     </Col>
                                 </FormGroup>
                                 <FormGroup row>
@@ -264,7 +271,6 @@ const CustomerForm = ({error, isLoading, saveCustomer, saveCustomerAction, custo
                                                 name="profilePhoto"
                                                 onChange={handlePhoto}
                                                 accept="image/jpeg, image/png" />
-                                        <button onClick={uploadProfilePhoto}>test</button>
                                     </Col>
                                 </FormGroup>
 
